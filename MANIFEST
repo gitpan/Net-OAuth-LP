@@ -1,0 +1,16 @@
+LICENSE
+MANIFEST
+META.yml
+Makefile.PL
+README
+README.md
+data/examples/auth.pl
+data/examples/bot
+data/examples/dump.pl
+dist.ini
+lib/Net/OAuth/LP.pm
+lib/Net/OAuth/LP/Client.pm
+t/00-load.t
+t/manifest.t
+t/pod-coverage.t
+t/pod.t
