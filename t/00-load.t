@@ -9,4 +9,4 @@ use Test::More;
 use_ok 'Net::OAuth::LP';
 use_ok 'Net::OAuth::LP::Client';
 
-done_testing();
+done_testing;

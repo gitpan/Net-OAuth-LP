@@ -24,28 +24,26 @@ my %WriteMakefileArgs = (
   "NAME" => "Net::OAuth::LP",
   "PREREQ_PM" => {
     "Browser::Open" => 0,
+    "Data::Dump" => 0,
     "File::Spec::Functions" => 0,
     "HTTP::Request" => 0,
     "HTTP::Request::Common" => 0,
     "JSON" => 0,
     "LWP::UserAgent" => 0,
-    "List::Compare" => 0,
-    "Moose" => 0,
-    "MooseX::Method::Signatures" => 0,
-    "MooseX::StrictConstructor" => 0,
+    "Method::Signatures" => 0,
+    "Moo" => 0,
     "Net::OAuth" => 0,
     "URI" => 0,
     "URI::Encode" => 0,
     "URI::QueryParam" => 0,
-    "Util::Any" => 0,
-    "namespace::autoclean" => 0
+    "Util::Any" => 0
   },
   "TEST_REQUIRES" => {
     "Test::More" => 0,
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.001",
+  "VERSION" => "0.002",
   "test" => {
     "TESTS" => "t/*.t"
   }

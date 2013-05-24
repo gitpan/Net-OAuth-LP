@@ -5,11 +5,9 @@ use warnings;
 use FindBin;
 use lib "$FindBin::Bin/../../lib";
 use Net::OAuth::LP::Client;
-use Data::Dumper;
+use Data::Dump qw(pp);
 use File::Spec::Functions;
 use YAML qw[LoadFile];
-use File::Temp;
-use IPC::Run qw[run];
 
 my $creds = LoadFile catfile($ENV{HOME}, '.lp-auth.yml');
 
@@ -23,18 +21,10 @@ my $client = Net::OAuth::LP::Client->new(
 $client->staging(1);
 
 my $bug  = $client->bug('859600');
-my @tags = qw[bark othertag];
+$client->bug_set_title($bug, "weeeeeeee haiiiiiiiii");
+pp($bug->{title});
 
-#eval { $client->bug_set_tags($bug, \@tags); };
-#warn $@ if $@;
+my $client_n = Net::OAuth::LP::Client->new;
+my $bug_n = $client->bug('859600');
 
-my $fh = File::Temp->new();
-my $filename = $fh->filename;
-system("sensible-editor $filename");
-
-open $fh, '<', $filename or die "cant open it";
-print Dumper(<$fh>);
-close $fh;
-
-
-
+pp($bug_n->{title});

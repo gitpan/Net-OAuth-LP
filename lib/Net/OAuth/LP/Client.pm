@@ -2,27 +2,23 @@ package Net::OAuth::LP::Client;
 
 # VERSION
 
-use namespace::autoclean;
-use Moose;
-use MooseX::StrictConstructor;
-use MooseX::Method::Signatures;
+use Moo;
+use Method::Signatures;
 
 use File::Spec::Functions;
 use HTTP::Request::Common;
 use HTTP::Request;
 use JSON;
+use Data::Dump qw(pp);
 
 use URI::Encode;
 use URI::QueryParam;
 use URI;
 use Util::Any -all;
-use List::Compare;
+use LWP::UserAgent;
 
 extends 'Net::OAuth::LP';
 
-###########################################################################
-# Private
-###########################################################################
 method __query_from_hash ($params) {
     my $uri = URI->new;
     for my $param (keys $params) {
@@ -52,11 +48,20 @@ method __oauth_authorization_header ($request) {
         'oauth_version="' . $request->version . '"');
 }
 
-###############################################################################
-# protected
-###############################################################################
 method _request ($resource, $params, $method) {
-    my $uri     = $self->__path_cons($resource);
+    my $ua  = LWP::UserAgent->new();
+    my $uri = $self->__path_cons($resource);
+
+    # If no credentials we assume data is public and
+    # bail out afterwards
+    if (!defined($self->consumer_key) || !defined($self->access_token) || !defined($self->access_token_secret)) {
+        my $res = $ua->request(GET $uri->as_string);
+        die $res->{_content} unless $res->is_success;
+        return decode_json($res->content);
+    }
+
+    # If we are here then it is assumed we've passed the
+    # necessary credentials to access protected data
     my $request = Net::OAuth->request('protected resource')->new(
         consumer_key     => $self->consumer_key,
         consumer_secret  => '',
@@ -76,7 +81,7 @@ method _request ($resource, $params, $method) {
         $_req->header(
             'Authorization' => $self->__oauth_authorization_header($request));
         $_req->content($self->__query_from_hash($params));
-        my $res = $self->lwp_req($_req);
+        my $res = $ua->request($_req);
         die "Failed to POST: " . $res->{_msg} unless ($res->{_rc} == 201);
     }
     elsif ($method eq "PATCH") {
@@ -89,7 +94,7 @@ method _request ($resource, $params, $method) {
         $_req->header(
             'Authorization' => $self->__oauth_authorization_header($request));
         $_req->content(encode_json($params));
-        my $res = $self->lwp_req($_req);
+        my $res = $ua->request($_req);
 
         # For current Launchpad API 1.0 the response code is 209
         # (Initially in draft spec for PATCH, but, later removed
@@ -100,7 +105,7 @@ method _request ($resource, $params, $method) {
         decode_json($res->content);
     }
     else {
-        my $res = $self->lwp_req(GET $request->to_url);
+        my $res = $ua->request(GET $request->to_url);
         die $res->{_content} unless $res->is_success;
         decode_json($res->content);
     }
@@ -118,10 +123,6 @@ method post ($resource, $params) {
 method update ($resource, $params) {
     $self->_request($resource, $params, 'PATCH');
 }
-
-###############################################################################
-# Public methods
-###############################################################################
 
 ###################################
 # Bug Getters
@@ -193,8 +194,6 @@ method search ($path, $segments) {
     $self->get($uri);
 }
 
-
-__PACKAGE__->meta->make_immutable;
 1;                          # End of Net::OAuth::LP::Client
 
 

@@ -11,6 +11,7 @@ dist.ini
 lib/Net/OAuth/LP.pm
 lib/Net/OAuth/LP/Client.pm
 t/00-load.t
+t/01-bug.t
 t/manifest.t
 t/pod-coverage.t
 t/pod.t
