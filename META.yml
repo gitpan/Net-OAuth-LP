@@ -27,12 +27,12 @@ requires:
   LWP::UserAgent: 0
   Method::Signatures: 0
   Moo: 0
+  Moo::Role: 0
   Net::OAuth: 0
   URI: 0
   URI::Encode: 0
   URI::QueryParam: 0
-  Util::Any: 0
 resources:
   homepage: https://github.com/battlemidget/Net-OAuth-LP
   repository: https://github.com/battlemidget/Net-OAuth-LP.git
-version: 0.002
+version: 0.003

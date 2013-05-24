@@ -32,18 +32,18 @@ my %WriteMakefileArgs = (
     "LWP::UserAgent" => 0,
     "Method::Signatures" => 0,
     "Moo" => 0,
+    "Moo::Role" => 0,
     "Net::OAuth" => 0,
     "URI" => 0,
     "URI::Encode" => 0,
-    "URI::QueryParam" => 0,
-    "Util::Any" => 0
+    "URI::QueryParam" => 0
   },
   "TEST_REQUIRES" => {
     "Test::More" => 0,
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.002",
+  "VERSION" => "0.003",
   "test" => {
     "TESTS" => "t/*.t"
   }
