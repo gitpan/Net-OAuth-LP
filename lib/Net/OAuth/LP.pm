@@ -10,7 +10,7 @@ use LWP::UserAgent;
 use Net::OAuth;
 $Net::OAuth::PROTOCOL_VERSION = Net::OAuth::PROTOCOL_VERSION_1_0;
 
-our $VERSION = '0.004'; # VERSION
+our $VERSION = '0.005'; # VERSION
 
 has consumer_key => (
     is      => 'rw',
@@ -92,7 +92,7 @@ has api_url => (
 has staging => (
     is      => 'rw',
     isa     => method {},
-    default => 0,
+    default => method { 0 },
 );
 
 method _nonce {

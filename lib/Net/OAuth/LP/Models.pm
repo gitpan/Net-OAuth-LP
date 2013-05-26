@@ -1,6 +1,6 @@
 package Net::OAuth::LP::Models;
 
-our $VERSION = '0.004'; # VERSION
+our $VERSION = '0.005'; # VERSION
 
 use Moo::Role;
 use Method::Signatures;
