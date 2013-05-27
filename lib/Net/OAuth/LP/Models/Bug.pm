@@ -1,6 +1,6 @@
 package Net::OAuth::LP::Models::Bug;
 
-our $VERSION = '0.006'; # VERSION
+our $VERSION = '0.007'; # VERSION
 
 use Moo;
 use Types::Standard qw(Str Int ArrayRef HashRef);
@@ -161,6 +161,10 @@ has 'self_link' => (
 
 method find ($bug_id) {
     my $resource_link = $self->__path_cons("bugs/$bug_id");
+    $self->bug($self->get($resource_link));
+}
+
+method find_by_link ($resource_link) {
     $self->bug($self->get($resource_link));
 }
 

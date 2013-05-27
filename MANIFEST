@@ -16,6 +16,7 @@ lib/Net/OAuth/LP/Models/Person.pm
 t/00-load.t
 t/01-bug.t
 t/02-person.t
+t/03-client.t
 t/manifest.t
 t/pod-coverage.t
 t/pod.t
