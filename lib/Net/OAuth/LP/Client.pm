@@ -1,6 +1,6 @@
 package Net::OAuth::LP::Client;
 
-our $VERSION = '0.005'; # VERSION
+our $VERSION = '0.006'; # VERSION
 
 use Moo::Role;
 use Method::Signatures;
@@ -185,6 +185,7 @@ Takes resource link and params, and performs an update to that endpoint.
 
     $lp->post('lp.net/bugs/1', { 'ws.op' => 'newMessage',
                                  'content' => "This is a message"});
+
 =head2 B<search>
 
 Performs a search request against the target distribution.

@@ -29,10 +29,11 @@ requires:
   Moo: 0
   Moo::Role: 0
   Net::OAuth: 0
+  Types::Standard: 0
   URI: 0
   URI::Encode: 0
   URI::QueryParam: 0
 resources:
   homepage: https://github.com/battlemidget/Net-OAuth-LP
   repository: https://github.com/battlemidget/Net-OAuth-LP.git
-version: 0.005
+version: 0.006

@@ -1,19 +1,11 @@
 package Net::OAuth::LP::Models;
 
-our $VERSION = '0.005'; # VERSION
+our $VERSION = '0.006'; # VERSION
 
 use Moo::Role;
 use Method::Signatures;
 
 with('Net::OAuth::LP::Client');
-
-method filter($criteria) {}
-
-method find {}
-
-method first {}
-
-method all {}
 
 1;
 
@@ -21,7 +13,7 @@ __END__
 
 =head1 NAME
 
-Net::OAuth::LP::Models
+Net::OAuth::LP::Models - Base class for models
 
 =head1 DESCRIPTION
 
