@@ -1,6 +1,6 @@
 package Net::OAuth::LP::Models::Person;
 
-our $VERSION = '0.008'; # VERSION
+our $VERSION = '0.009'; # VERSION
 
 use strictures 1;
 use Moo;
