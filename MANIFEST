@@ -14,9 +14,12 @@ lib/Net/OAuth/LP/Models.pm
 lib/Net/OAuth/LP/Models/Activity.pm
 lib/Net/OAuth/LP/Models/Attachments.pm
 lib/Net/OAuth/LP/Models/Bug.pm
+lib/Net/OAuth/LP/Models/CVE.pm
+lib/Net/OAuth/LP/Models/Linkedbranches.pm
 lib/Net/OAuth/LP/Models/Messages.pm
 lib/Net/OAuth/LP/Models/Person.pm
 lib/Net/OAuth/LP/Models/Tasks.pm
+lib/Net/OAuth/LP/Models/Watches.pm
 t/00-load.t
 t/01-bug.t
 t/02-person.t
@@ -25,6 +28,9 @@ t/04-tasks.t
 t/05-messages.t
 t/06-activity.t
 t/07-attachments.t
+t/08-watches.t
+t/09-linkedbranches.t
+t/10-cves.t
 t/manifest.t
 t/pod-coverage.t
 t/pod.t

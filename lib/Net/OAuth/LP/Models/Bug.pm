@@ -1,12 +1,19 @@
 package Net::OAuth::LP::Models::Bug;
 
-our $VERSION = '0.010'; # VERSION
+our $VERSION = '0.012'; # VERSION
 
 use strictures 1;
-use Net::OAuth::LP::Models::Tasks;
-use Net::OAuth::LP::Models::Messages;
+
+# MODELS
 use Net::OAuth::LP::Models::Activity;
 use Net::OAuth::LP::Models::Attachments;
+use Net::OAuth::LP::Models::CVE;
+use Net::OAuth::LP::Models::Linkedbranches;
+use Net::OAuth::LP::Models::Messages;
+use Net::OAuth::LP::Models::Person;
+use Net::OAuth::LP::Models::Tasks;
+use Net::OAuth::LP::Models::Watches;
+use Data::Dump qw[pp];
 
 use Moo;
 use Types::Standard qw(Str Int ArrayRef HashRef);
@@ -14,12 +21,7 @@ use Method::Signatures;
 
 with('Net::OAuth::LP::Models');
 
-has 'bug' => (
-    is      => 'rw',
-    isa     => HashRef,
-    lazy    => 1,
-    default => method { {} },
-);
+has 'bug' => (is => 'rw');
 
 has 'tasks' => (
     is      => 'ro',
@@ -27,7 +29,7 @@ has 'tasks' => (
     default => method {
         Net::OAuth::LP::Models::Tasks->new(
             c     => $self->c,
-            tasks => $self->c->get($self->bug->{bug_tasks_collection_link})
+            tasks => $self->c->get($self->bug->bug_tasks_collection_link)
         );
     }
 );
@@ -38,7 +40,7 @@ has 'messages' => (
     default => method {
         Net::OAuth::LP::Models::Messages->new(
             c        => $self->c,
-            messages => $self->c->get($self->bug->{messages_collection_link})
+            messages => $self->c->get($self->bug->messages_collection_link)
         );
     },
 );
@@ -49,7 +51,7 @@ has 'activity' => (
     default => method {
         Net::OAuth::LP::Models::Activity->new(
             c        => $self->c,
-            activity => $self->c->get($self->bug->{activity_collection_link})
+            activity => $self->c->get($self->bug->activity_collection_link)
         );
     },
 );
@@ -61,125 +63,51 @@ has 'attachments' => (
         Net::OAuth::LP::Models::Attachments->new(
             c => $self->c,
             attachments =>
-              $self->c->get($self->bug->{attachments_collection_link})
+              $self->c->get($self->bug->attachments_collection_link)
         );
     },
 );
 
 has 'watches' => (
     is      => 'ro',
-    isa     => HashRef,
     lazy    => 1,
     default => method {
-        $self->c->get($self->bug->{bug_watches_collection_link});
-    },
-);
-
-has 'can_expire' => (
-    is      => 'ro',
-    isa     => method {},
-    lazy    => 1,
-    default => method {
-        $self->bug->{can_expire};
+        Net::OAuth::LP::Models::Watches->new(
+            c       => $self->c,
+            watches => $self->c->get($self->bug->bug_watches_collection_link)
+        );
     },
 );
 
 has 'cves' => (
     is      => 'ro',
-    isa     => HashRef,
     lazy    => 1,
     default => method {
-        $self->c->get($self->bug->{cves_collection_link});
+        Net::OAuth::LP::Models::CVE->new(
+            c    => $self->c,
+            cves => $self->c->get($self->bug->cves_collection_link)
+        );
     },
 );
 
-has 'description' => (
+has 'linkedbranches' => (
     is      => 'ro',
-    isa     => Str,
     lazy    => 1,
     default => method {
-        $self->bug->{description};
-    },
-);
-
-has 'heat' => (
-    is      => 'ro',
-    isa     => Int,
-    lazy    => 1,
-    default => method {
-        $self->bug->{heat};
-    },
-);
-
-has 'information_type' => (
-    is      => 'ro',
-    isa     => Str,
-    lazy    => 1,
-    default => method {
-        $self->bug->{information_type};
-    },
-);
-
-has 'branches' => (
-    is      => 'ro',
-    isa     => HashRef,
-    lazy    => 1,
-    default => method {
-        self->c->get($self->bug->{linked_branches_collection_link});
+        Net::OAuth::LP::Models::Linkedbranches->new(
+            c => $self->c,
+            linkedbranches =>
+              $self->c->get($self->bug->linked_branches_collection_link)
+        );
     },
 );
 
 has 'owner' => (
     is      => 'ro',
-    isa     => HashRef,
     lazy    => 1,
     default => method {
-        $self->c->get($self->bug->{owner_link});
-    },
-);
-
-has 'title' => (
-    is      => 'rw',
-    isa     => Str,
-    lazy    => 1,
-    default => method {
-        $self->bug->{title};
-    },
-);
-
-has 'tags' => (
-    is      => 'ro',
-    isa     => ArrayRef,
-    lazy    => 1,
-    default => method {
-        $self->bug->{tags};
-    },
-);
-
-has 'id' => (
-    is      => 'ro',
-    isa     => Int,
-    lazy    => 1,
-    default => method {
-        $self->bug->{id};
-    },
-);
-
-has 'web_link' => (
-    is      => 'ro',
-    isa     => Str,
-    lazy    => 1,
-    default => method {
-        $self->bug->{web_link};
-    },
-);
-
-has 'self_link' => (
-    is      => 'ro',
-    isa     => Str,
-    lazy    => 1,
-    default => method {
-        $self->bug->{self_link};
+        my $p = Net::OAuth::LP::Models::Person->new(c => $self->c);
+        $p->find_by_link($self->bug->owner_link);
     },
 );
 
@@ -214,26 +142,26 @@ method find_by_link ($resource_link) {
 }
 
 method set_tags ($tags) {
-    $self->c->update($self->self_link, {'tags' => $tags});
+    $self->c->update($self->bug->self_link, {'tags' => $tags});
 }
 
 method set_title ($title) {
-    $self->c->update($self->self_link, {'title' => $title});
+    $self->c->update($self->bug->self_link, {'title' => $title});
 }
 
 method set_assignee ($assignee) {
-    $self->c->update($self->bug->tasks->{self_link},
+    $self->c->update($self->bug->tasks->self_link,
         {'assignee_link' => $assignee->self_link});
 }
 
 method set_importance ($importance) {
-    $self->c->update($self->bug->tasks->{self_link},
+    $self->c->update($self->bug->tasks->self_link,
         {'importance' => $importance});
 }
 
 method new_message ($msg) {
     $self->c->post(
-        $self->self_link,
+        $self->bug->self_link,
         {   'ws.op'   => 'newMessage',
             'content' => $msg
         }
@@ -267,8 +195,6 @@ Interface to setting/retrieving bug information
 
 =head2 B<attachments>
 
-=head2 B<branches>
-
 =head2 B<bug>
 
 =head2 B<display_name>
@@ -278,6 +204,8 @@ Interface to setting/retrieving bug information
 =head2 B<id>
 
 =head2 B<information_type>
+
+=head2 B<linkedbranches>
 
 =head2 B<name>
 

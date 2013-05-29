@@ -1,6 +1,6 @@
 package Net::OAuth::LP::Models;
 
-our $VERSION = '0.010'; # VERSION
+our $VERSION = '0.012'; # VERSION
 
 use strictures 1;
 use Moo::Role;

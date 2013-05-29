@@ -1,6 +1,6 @@
 package Net::OAuth::LP::Models::Tasks;
 
-our $VERSION = '0.010'; # VERSION
+our $VERSION = '0.012'; # VERSION
 
 use strictures 1;
 use Moo;
@@ -14,7 +14,7 @@ with('Net::OAuth::LP::Models');
 has 'tasks' => (is => 'rw',);
 
 method entries {
-  array(@{$self->tasks->{entries}});
+  array(@{$self->tasks->entries});
 }
 
 1;
@@ -41,14 +41,10 @@ Interface to setting/retrieving bug tasks information
 
 =head1 METHODS
 
+In addition to those listed this object inherits methods from List::Objects::WithUtils.
+
 =head2 B<new>
 
     my $tasks = Net::OAuth::LP::Models::Tasks->new(tasks => $bug->tasks);
-
-=head2 B<all>
-
-Returns all tasks results
-
-    say $tasks->all;
 
 =cut

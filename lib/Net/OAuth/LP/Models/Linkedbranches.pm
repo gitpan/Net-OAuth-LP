@@ -1,4 +1,4 @@
-package Net::OAuth::LP::Models::Messages;
+package Net::OAuth::LP::Models::Linkedbranches;
 
 our $VERSION = '0.012'; # VERSION
 
@@ -11,10 +11,10 @@ use Data::Dump qw(pp);
 
 with('Net::OAuth::LP::Models');
 
-has 'messages' => (is => 'rw',);
+has 'linkedbranches' => (is => 'rw',);
 
 method entries {
-  array(@{$self->messages->entries});
+  array(@{$self->linkedbranches->entries});
 }
 
 1;
@@ -23,11 +23,11 @@ __END__
 
 =head1 NAME
 
-Net::OAuth::LP::Models::Messages - Bug Messages Model
+Net::OAuth::LP::Models::Linkedbranches - Bug Linkedbranches Model
 
 =head1 DESCRIPTION
 
-Interface to setting/retrieving bug messages information
+Interface to setting/retrieving bug linkedbranches information
 
 =head1 SYNOPSIS
 
@@ -37,7 +37,7 @@ Interface to setting/retrieving bug messages information
 
     my $b = Net::OAuth::LP::Models::Bug->new(c => $c);
     $b->find(1);
-    say $b->messages->all;
+    say $b->linkedbranches->all;
 
 =head1 METHODS
 
@@ -45,6 +45,6 @@ In addition to those listed this object inherits methods from List::Objects::Wit
 
 =head2 B<new>
 
-    my $messages = Net::OAuth::LP::Models::Messages->new(messages => $bug->messages);
+    my $linkedbranches = Net::OAuth::LP::Models::Linkedbranches->new(linkedbranches => $bug->linkedbranches);
 
 =cut
