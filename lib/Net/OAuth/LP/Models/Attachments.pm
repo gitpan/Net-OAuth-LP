@@ -1,4 +1,4 @@
-package Net::OAuth::LP::Models::Tasks;
+package Net::OAuth::LP::Models::Attachments;
 
 our $VERSION = '0.0010'; # VERSION
 
@@ -11,10 +11,10 @@ use Data::Dump qw(pp);
 
 with('Net::OAuth::LP::Models');
 
-has 'tasks' => (is => 'rw',);
+has 'attachments' => (is => 'rw',);
 
 method entries {
-  array(@{$self->tasks->{entries}});
+  array(@{$self->attachments->{entries}});
 }
 
 1;
@@ -23,11 +23,11 @@ __END__
 
 =head1 NAME
 
-Net::OAuth::LP::Models::Tasks - Bug Tasks Model
+Net::OAuth::LP::Models::Attachments - Bug Attachments Model
 
 =head1 DESCRIPTION
 
-Interface to setting/retrieving bug tasks information
+Interface to setting/retrieving bug attachments information
 
 =head1 SYNOPSIS
 
@@ -37,18 +37,18 @@ Interface to setting/retrieving bug tasks information
 
     my $b = Net::OAuth::LP::Models::Bug->new(c => $c);
     $b->find(1);
-    say $b->tasks->all;
+    say $b->attachments->all;
 
 =head1 METHODS
 
 =head2 B<new>
 
-    my $tasks = Net::OAuth::LP::Models::Tasks->new(tasks => $bug->tasks);
+    my $attachments = Net::OAuth::LP::Models::Attachments->new(attachments => $bug->attachments);
 
 =head2 B<all>
 
-Returns all tasks results
+Returns all attachments results
 
-    say $tasks->all;
+    say $attachments->all;
 
 =cut

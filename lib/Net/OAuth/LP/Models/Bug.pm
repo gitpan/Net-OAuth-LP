@@ -1,9 +1,12 @@
 package Net::OAuth::LP::Models::Bug;
 
-our $VERSION = '0.009'; # VERSION
+our $VERSION = '0.0010'; # VERSION
 
 use strictures 1;
 use Net::OAuth::LP::Models::Tasks;
+use Net::OAuth::LP::Models::Messages;
+use Net::OAuth::LP::Models::Activity;
+use Net::OAuth::LP::Models::Attachments;
 
 use Moo;
 use Types::Standard qw(Str Int ArrayRef HashRef);
@@ -29,21 +32,37 @@ has 'tasks' => (
     }
 );
 
-has 'activity' => (
+has 'messages' => (
     is      => 'ro',
-    isa     => HashRef,
     lazy    => 1,
     default => method {
-        $self->c->get($self->bug->{activity_collection_link});
+        Net::OAuth::LP::Models::Messages->new(
+            c        => $self->c,
+            messages => $self->c->get($self->bug->{messages_collection_link})
+        );
+    },
+);
+
+has 'activity' => (
+    is      => 'ro',
+    lazy    => 1,
+    default => method {
+        Net::OAuth::LP::Models::Activity->new(
+            c        => $self->c,
+            activity => $self->c->get($self->bug->{activity_collection_link})
+        );
     },
 );
 
 has 'attachments' => (
     is      => 'ro',
-    isa     => HashRef,
     lazy    => 1,
     default => method {
-        $self->c->get($self->bug->{attachments_collection_link});
+        Net::OAuth::LP::Models::Attachments->new(
+            c => $self->c,
+            attachments =>
+              $self->c->get($self->bug->{attachments_collection_link})
+        );
     },
 );
 

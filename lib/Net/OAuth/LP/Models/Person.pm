@@ -1,6 +1,6 @@
 package Net::OAuth::LP::Models::Person;
 
-our $VERSION = '0.009'; # VERSION
+our $VERSION = '0.0010'; # VERSION
 
 use strictures 1;
 use Moo;
@@ -136,7 +136,7 @@ __END__
 
 =head1 NAME
 
-Net::OAuth::LP::Models::Person - Person interface
+Net::OAuth::LP::Models::Person - Person model
 
 =head1 DESCRIPTION
 

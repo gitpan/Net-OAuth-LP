@@ -11,7 +11,10 @@ dist.ini
 lib/Net/OAuth/LP.pm
 lib/Net/OAuth/LP/Client.pm
 lib/Net/OAuth/LP/Models.pm
+lib/Net/OAuth/LP/Models/Activity.pm
+lib/Net/OAuth/LP/Models/Attachments.pm
 lib/Net/OAuth/LP/Models/Bug.pm
+lib/Net/OAuth/LP/Models/Messages.pm
 lib/Net/OAuth/LP/Models/Person.pm
 lib/Net/OAuth/LP/Models/Tasks.pm
 t/00-load.t
@@ -19,6 +22,9 @@ t/01-bug.t
 t/02-person.t
 t/03-client.t
 t/04-tasks.t
+t/05-messages.t
+t/06-activity.t
+t/07-attachments.t
 t/manifest.t
 t/pod-coverage.t
 t/pod.t
