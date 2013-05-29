@@ -1,5 +1,6 @@
 package Net::OAuth::LP;
 
+use strictures 1;
 use Moo::Role;
 use Method::Signatures;
 
@@ -10,7 +11,7 @@ use LWP::UserAgent;
 use Net::OAuth;
 $Net::OAuth::PROTOCOL_VERSION = Net::OAuth::PROTOCOL_VERSION_1_0;
 
-our $VERSION = '0.007'; # VERSION
+our $VERSION = '0.008'; # VERSION
 
 has consumer_key => (
     is      => 'rw',

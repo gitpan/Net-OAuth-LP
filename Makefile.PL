@@ -25,11 +25,11 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "Browser::Open" => 0,
     "Data::Dump" => 0,
-    "File::Spec::Functions" => 0,
     "HTTP::Request" => 0,
     "HTTP::Request::Common" => 0,
     "JSON" => 0,
     "LWP::UserAgent" => 0,
+    "List::Objects::WithUtils" => 0,
     "Method::Signatures" => 0,
     "Moo" => 0,
     "Moo::Role" => 0,
@@ -37,14 +37,15 @@ my %WriteMakefileArgs = (
     "Types::Standard" => 0,
     "URI" => 0,
     "URI::Encode" => 0,
-    "URI::QueryParam" => 0
+    "URI::QueryParam" => 0,
+    "strictures" => 1
   },
   "TEST_REQUIRES" => {
     "Test::More" => 0,
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.007",
+  "VERSION" => "0.008",
   "test" => {
     "TESTS" => "t/*.t"
   }
