@@ -1,6 +1,6 @@
 package Net::OAuth::LP::Models::Activity;
 
-our $VERSION = '0.0010'; # VERSION
+our $VERSION = '0.010'; # VERSION
 
 use strictures 1;
 use Moo;
