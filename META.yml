@@ -38,4 +38,4 @@ requires:
 resources:
   homepage: https://github.com/battlemidget/Net-OAuth-LP
   repository: https://github.com/battlemidget/Net-OAuth-LP.git
-version: 0.012
+version: 0.013
