@@ -3,11 +3,10 @@ MANIFEST
 META.yml
 Makefile.PL
 README
-README.md
-data/examples/auth.pl
-data/examples/bot
-data/examples/dump.pl
+cpanfile
 dist.ini
+eg/auth.pl
+eg/dump.pl
 lib/Net/OAuth/LP.pm
 lib/Net/OAuth/LP/Client.pm
 lib/Net/OAuth/LP/Models.pm

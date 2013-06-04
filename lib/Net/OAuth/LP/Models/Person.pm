@@ -1,13 +1,12 @@
 package Net::OAuth::LP::Models::Person;
 
-our $VERSION = '0.013'; # VERSION
+our $VERSION = '0.014'; # VERSION
 
 use strictures 1;
 use Moo;
 use Types::Standard qw(Str Int ArrayRef HashRef);
 use Method::Signatures;
 use Hash::AsObject;
-use Data::Dump qw(pp);
 
 with('Net::OAuth::LP::Models');
 

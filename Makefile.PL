@@ -2,12 +2,10 @@
 use strict;
 use warnings;
 
-
+use 5.010000;
 
 use ExtUtils::MakeMaker 6.30;
 
-use File::ShareDir::Install;
-install_share dist => "data";
 
 
 my %WriteMakefileArgs = (
@@ -15,8 +13,7 @@ my %WriteMakefileArgs = (
   "AUTHOR" => "Adam Stokes <adam.stokes\@ubuntu.com>",
   "BUILD_REQUIRES" => {},
   "CONFIGURE_REQUIRES" => {
-    "ExtUtils::MakeMaker" => "6.30",
-    "File::ShareDir::Install" => "0.03"
+    "ExtUtils::MakeMaker" => "6.30"
   },
   "DISTNAME" => "Net-OAuth-LP",
   "EXE_FILES" => [],
@@ -24,7 +21,6 @@ my %WriteMakefileArgs = (
   "NAME" => "Net::OAuth::LP",
   "PREREQ_PM" => {
     "Browser::Open" => 0,
-    "Data::Dump" => 0,
     "HTTP::Request" => 0,
     "HTTP::Request::Common" => 0,
     "Hash::AsObject" => 0,
@@ -39,14 +35,15 @@ my %WriteMakefileArgs = (
     "URI" => 0,
     "URI::Encode" => 0,
     "URI::QueryParam" => 0,
+    "bareword::filehandles" => 0,
+    "indirect" => 0,
+    "multidimensional" => 0,
     "strictures" => 1
   },
   "TEST_REQUIRES" => {
-    "Test::More" => 0,
-    "strict" => 0,
-    "warnings" => 0
+    "Test::More" => 0
   },
-  "VERSION" => "0.013",
+  "VERSION" => "0.014",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -84,10 +81,5 @@ delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
 
 WriteMakefile(%WriteMakefileArgs);
 
-{
-package
-MY;
-use File::ShareDir::Install qw(postamble);
-}
 
 

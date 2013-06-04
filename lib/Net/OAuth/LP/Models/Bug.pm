@@ -1,6 +1,6 @@
 package Net::OAuth::LP::Models::Bug;
 
-our $VERSION = '0.013'; # VERSION
+our $VERSION = '0.014'; # VERSION
 
 use strictures 1;
 
@@ -13,7 +13,6 @@ use Net::OAuth::LP::Models::Messages;
 use Net::OAuth::LP::Models::Person;
 use Net::OAuth::LP::Models::Tasks;
 use Net::OAuth::LP::Models::Watches;
-use Data::Dump qw[pp];
 
 use Moo;
 use Types::Standard qw(Str Int ArrayRef HashRef);
