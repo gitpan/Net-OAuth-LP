@@ -1,6 +1,6 @@
 package Net::OAuth::LP::Models::Attachments;
 
-our $VERSION = '0.014'; # VERSION
+our $VERSION = '0.015'; # VERSION
 
 use strictures 1;
 use Moo;

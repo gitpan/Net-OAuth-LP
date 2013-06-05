@@ -20,7 +20,6 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Net::OAuth::LP",
   "PREREQ_PM" => {
-    "Browser::Open" => 0,
     "HTTP::Request" => 0,
     "HTTP::Request::Common" => 0,
     "Hash::AsObject" => 0,
@@ -35,15 +34,12 @@ my %WriteMakefileArgs = (
     "URI" => 0,
     "URI::Encode" => 0,
     "URI::QueryParam" => 0,
-    "bareword::filehandles" => 0,
-    "indirect" => 0,
-    "multidimensional" => 0,
     "strictures" => 1
   },
   "TEST_REQUIRES" => {
     "Test::More" => 0
   },
-  "VERSION" => "0.014",
+  "VERSION" => "0.015",
   "test" => {
     "TESTS" => "t/*.t"
   }

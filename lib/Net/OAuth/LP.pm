@@ -4,14 +4,13 @@ use strictures 1;
 use Moo::Role;
 use Method::Signatures;
 
-use Browser::Open qw[open_browser];
 use HTTP::Request::Common;
 use LWP::UserAgent;
 
 use Net::OAuth;
 $Net::OAuth::PROTOCOL_VERSION = Net::OAuth::PROTOCOL_VERSION_1_0;
 
-our $VERSION = '0.014'; # VERSION
+our $VERSION = '0.015'; # VERSION
 
 has consumer_key => (
     is      => 'rw',
