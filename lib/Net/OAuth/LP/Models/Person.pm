@@ -1,6 +1,6 @@
 package Net::OAuth::LP::Models::Person;
 
-our $VERSION = '0.015'; # VERSION
+our $VERSION = '0.015_01'; # VERSION
 
 use strictures 1;
 use Moo;
@@ -83,6 +83,8 @@ Model interface for retrieving/setting person/team information.
 =head2 B<attrs>
 
 Contains hash object of https://api.launchpad.net/1.0.html#person
+
+=head2 B<resource>
 
 =head1 METHODS
 

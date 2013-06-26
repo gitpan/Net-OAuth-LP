@@ -20,6 +20,7 @@ on 'test' => sub {
 };
 
 on 'test' => sub {
+  recommends "Pod::Coverage" => "0";
   recommends "bareword::filehandles" => "0";
   recommends "indirect" => "0";
   recommends "multidimensional" => "0";

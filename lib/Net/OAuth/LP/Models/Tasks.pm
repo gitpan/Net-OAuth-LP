@@ -1,6 +1,6 @@
 package Net::OAuth::LP::Models::Tasks;
 
-our $VERSION = '0.015'; # VERSION
+our $VERSION = '0.015_01'; # VERSION
 
 use strictures 1;
 use Moo;
@@ -37,6 +37,10 @@ Interface to setting/retrieving bug tasks information
     my $b = Net::OAuth::LP::Models::Bug->new(c => $c);
     $b->find(1);
     say $b->tasks->all;
+
+=head1 ATTRIBUTES
+
+=head2 B<tasks>
 
 =head1 METHODS
 

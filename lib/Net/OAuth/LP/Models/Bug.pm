@@ -1,6 +1,6 @@
 package Net::OAuth::LP::Models::Bug;
 
-our $VERSION = '0.015'; # VERSION
+our $VERSION = '0.015_01'; # VERSION
 
 use strictures 1;
 
@@ -140,6 +140,8 @@ Interface to setting/retrieving bug information
 =head2 B<attrs>
 
     Contains hash object of https://api.launchpad.net/1.0.html#bug
+
+=head2 B<resource>
 
 =head1 METHODS
 

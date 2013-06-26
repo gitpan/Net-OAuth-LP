@@ -1,6 +1,6 @@
 package Net::OAuth::LP::Client;
 
-our $VERSION = '0.015'; # VERSION
+our $VERSION = '0.015_01'; # VERSION
 use v5.10;
 use strictures 1;
 use Moo;
