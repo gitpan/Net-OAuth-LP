@@ -20,6 +20,7 @@ on 'test' => sub {
 };
 
 on 'test' => sub {
+  recommends "IO::Socket::SSL" => "0";
   recommends "Pod::Coverage" => "0";
   recommends "bareword::filehandles" => "0";
   recommends "indirect" => "0";

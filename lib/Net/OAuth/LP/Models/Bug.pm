@@ -1,6 +1,6 @@
 package Net::OAuth::LP::Models::Bug;
 
-our $VERSION = '0.015_01'; # VERSION
+our $VERSION = '0.015_02'; # VERSION
 
 use strictures 1;
 
