@@ -36,12 +36,10 @@ SUPPORT
 SEE ALSO
     *   <https://launchpad.net/launchpadlib>, "Python implementation"
 
-LICENSE AND COPYRIGHT
-    Copyright 2013 Adam Stokes.
+COPYRIGHT
+    Copyright 2013- Adam Stokes
 
-    This program is free software; you can redistribute it and/or modify it
-    under the terms of either: the GNU General Public License as published
-    by the Free Software Foundation; or the Artistic License.
-
-    See <http://dev.perl.org/licenses/> for more information.
+LICENSE
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
 

@@ -10,7 +10,7 @@ use LWP::UserAgent;
 use Net::OAuth;
 $Net::OAuth::PROTOCOL_VERSION = Net::OAuth::PROTOCOL_VERSION_1_0;
 
-our $VERSION = '0.015_02'; # VERSION
+our $VERSION = '0.015_03';
 
 has consumer_key => (
     is      => 'rw',
@@ -161,16 +161,14 @@ You can find documentation for this module with the perldoc command.
 
 =back
 
-=head1 LICENSE AND COPYRIGHT
+=head1 COPYRIGHT
 
-Copyright 2013 Adam Stokes.
+Copyright 2013- Adam Stokes
 
-This program is free software; you can redistribute it and/or modify it
-under the terms of either: the GNU General Public License as published
-by the Free Software Foundation; or the Artistic License.
+=head1 LICENSE
 
-See L<http://dev.perl.org/licenses/> for more information.
-
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 
