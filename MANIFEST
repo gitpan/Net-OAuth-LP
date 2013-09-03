@@ -6,6 +6,7 @@ META.json
 META.yml
 README
 cpanfile
+cpanfile.snapshot
 dist.ini
 eg/auth.pl
 eg/dump.pl
