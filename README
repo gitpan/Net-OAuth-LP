@@ -12,14 +12,33 @@ ATTRIBUTES
 
         $lp->consumer_key('my-app-name');
 
-  token
+  access_token
     Token received from authorized request
 
-  token_secret
+  access_token_secret
     Token secret received from authorized request
 
+  staging
+    Boolean to interact with staging server or production.
+
+  ua
+    A Mojo::UserAgent.
+
+METHODS
+  access_token_url
+    OAuth Access token url
+
+  authorize_token_url
+    OAuth Authorize token url
+
+  request_token_url
+    OAuth Request token url
+
+  api_url
+    API url for doing the client interactions with launchpad.net
+
 AUTHOR
-    Adam 'battlemidget' Stokes, "<adamjs at cpan.org>"
+    Adam Stokes, "<adamjs at cpan.org>"
 
 BUGS
     Report bugs to https://github.com/battlemidget/Net-OAuth-LP/issues.
@@ -37,7 +56,7 @@ SEE ALSO
     *   <https://launchpad.net/launchpadlib>, "Python implementation"
 
 COPYRIGHT
-    Copyright 2013- Adam Stokes
+    Copyright 2013-2014 Adam Stokes
 
 LICENSE
     This library is free software; you can redistribute it and/or modify it

@@ -3,29 +3,38 @@
 # for quick tests only, should not be depended upon for
 # proper examples of current api.
 
-use strictures 1;
-use 5.16.3;
+use Mojo::Base -strict;
+use 5.14.0;
 use FindBin;
 use lib "$FindBin::Bin/../../lib";
-use Net::OAuth::LP::Models::Bug;
-use Net::OAuth::LP::Models::Person;
 use Net::OAuth::LP::Client;
-use Data::Dump qw(pp);
+
+use DDP;
 
 my $c = Net::OAuth::LP::Client->new;
 $c->staging(1);
 
-my $bug = Net::OAuth::LP::Models::Bug->new(c => $c, resource => '859600');
-my $person =
-  Net::OAuth::LP::Models::Person->new(c => $c, resource => '~adam-stokes');
-$bug->fetch;
-my $bugtask = $bug->tasks->entries->first(
-    sub { $_->{bug_target_name} =~ /ubuntu-advantage|(Ubuntu)/ });
-$bug->attrs->{target_name} = $bugtask->{bug_target_name};
-$bug->attrs->{status}      = $bugtask->{status};
-$bug->attrs->{importance}  = $bugtask->{importance};
-$bug->attrs->title($bugtask->{title});
+my $bug = $c->namespace('Bug')->by_id(859600);
 
-pp($bug->attrs);
+say "Title: ". $bug->title;
+say "Desc:  ". $bug->description;
+say "Heat:  ". $bug->heat;
+say "Br0ke: ". $bug->bug->{test};
+
+my $person = $c->namespace('Person');
+#->by_name('~adam-stokes');
+p $person;
+
+
+
+#$c->get_bug(859600);
+# my $bugtask = $bug->tasks->entries->first(
+#     sub { $_->{bug_target_name} =~ /ubuntu-advantage|(Ubuntu)/ });
+# $bug->{target_name} = $bugtask->{bug_target_name};
+# $bug->{status}      = $bugtask->{status};
+# $bug->{importance}  = $bugtask->{importance};
+# $bug->title($bugtask->{title});
+
+# p $bug;
 
 

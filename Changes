@@ -1,3 +1,15 @@
+0.017_3  2014-01-03 20:26:18 EST
+  - Updated unittests to work with new api
+  - Enabled pod test coverage to make sure I was
+    completing all documentation :)
+
+0.017_2  2014-01-03 20:02:47 EST
+  - Switch out to use Mojo as networking library
+  - Re-worked Model interfaces
+
+0.017_1  2014-01-02 15:24:07 EST
+  - Next build dev release
+
 0.016  2013-09-03 17:41:10 EDT
   - Fix unittests
   - Extend api

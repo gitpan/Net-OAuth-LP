@@ -1,108 +1,67 @@
 package Net::OAuth::LP;
 
-use strictures 1;
-use Moo::Role;
-use Method::Signatures;
-
-use HTTP::Request::Common;
-use LWP::UserAgent;
+use Mojo::Base -base;
+use Mojo::UserAgent;
 
 use Net::OAuth;
 $Net::OAuth::PROTOCOL_VERSION = Net::OAuth::PROTOCOL_VERSION_1_0;
 
-our $VERSION = '0.016';
+our $VERSION = '0.017_3';
 
-has consumer_key => (
-    is      => 'rw',
-    isa     => method {},
-    lazy    => 1,
-    default => 'im-a-key',
-);
+has 'ua' => sub { my $self = shift; Mojo::UserAgent->new };
+has 'consumer_key' => 'im-a-key';
+has 'access_token';
+has 'access_token_secret';
+has staging => 0;
 
-has access_token => (
-    is      => 'rw',
-    isa     => method {},
-    default => '',
-    lazy    => 1,
-);
+sub request_token_url {
+    my $self = shift;
+    if ($self->staging) {
+        'https://staging.launchpad.net/+request-token';
+    }
+    else {
+        'https://launchpad.net/+request-token';
+    }
+}
 
-has access_token_secret => (
-    is      => 'rw',
-    isa     => method {},
-    default => '',
-    lazy    => 1,
-);
+sub access_token_url {
+    my $self = shift;
+    if ($self->staging) {
+        'https://staging.launchpad.net/+access-token';
+    }
+    else {
+        'https://launchpad.net/+access-token';
+    }
+}
 
-has request_token_url => (
-    is      => 'ro',
-    isa     => method {},
-    default => method {
-        if ($self->staging) {
-            'https://staging.launchpad.net/+request-token';
-        }
-        else {
-            'https://launchpad.net/+request-token';
-        }
-    },
-    lazy => 1,
-);
+sub authorize_token_url {
+    my $self = shift;
+    if ($self->staging) {
+        'https://staging.launchpad.net/+authorize-token';
+    }
+    else {
+        'https://launchpad.net/+authorize-token';
+    }
+}
 
-has access_token_url => (
-    is      => 'ro',
-    isa     => method {},
-    default => method {
-        if ($self->staging) {
-            'https://staging.launchpad.net/+access-token';
-        }
-        else {
-            'https://launchpad.net/+access-token';
-        }
-    },
-    lazy => 1,
-);
+sub api_url {
+    my $self = shift;
+    if ($self->staging) {
+        'https://api.staging.launchpad.net/1.0';
+    }
+    else {
+        'https://api.launchpad.net/1.0';
+    }
+}
 
-has authorize_token_url => (
-    is      => 'ro',
-    isa     => method {},
-    default => method {
-        if ($self->staging) {
-            'https://staging.launchpad.net/+authorize-token';
-        }
-        else {
-            'https://launchpad.net/+authorize-token';
-        }
-    },
-    lazy => 1,
-);
-
-has api_url => (
-    is      => 'ro',
-    isa     => method {},
-    lazy    => 1,
-    default => method {
-        if ($self->staging) {
-            'https://api.staging.launchpad.net/1.0';
-        }
-        else {
-            'https://api.launchpad.net/1.0';
-        }
-    },
-);
-
-has staging => (
-    is      => 'rw',
-    isa     => method {},
-    default => method { 0 },
-);
-
-method _nonce {
-    my @a = ('A' .. 'Z', 'a' .. 'z', 0 .. 9);
+sub _nonce {
+    my $self  = shift;
+    my @a     = ('A' .. 'Z', 'a' .. 'z', 0 .. 9);
     my $nonce = '';
     for (0 .. 31) {
         $nonce .= $a[rand(scalar(@a))];
     }
-
-    $nonce;
+    return $nonce;
 }
 
 1;
@@ -125,17 +84,43 @@ Holds the string that identifies your application.
 
     $lp->consumer_key('my-app-name');
 
-=head2 B<token>
+=head2 B<access_token>
 
 Token received from authorized request
 
-=head2 B<token_secret>
+=head2 B<access_token_secret>
 
 Token secret received from authorized request
 
+=head2 B<staging>
+
+Boolean to interact with staging server or production.
+
+=head2 B<ua>
+
+A L<Mojo::UserAgent>.
+
+=head1 METHODS
+
+=head2 B<access_token_url>
+
+OAuth Access token url
+
+=head2 B<authorize_token_url>
+
+OAuth Authorize token url
+
+=head2 B<request_token_url>
+
+OAuth Request token url
+
+=head2 B<api_url>
+
+API url for doing the client interactions with launchpad.net
+
 =head1 AUTHOR
 
-Adam 'battlemidget' Stokes, C<< <adamjs at cpan.org> >>
+Adam Stokes, C<< <adamjs at cpan.org> >>
 
 =head1 BUGS
 
@@ -163,7 +148,7 @@ You can find documentation for this module with the perldoc command.
 
 =head1 COPYRIGHT
 
-Copyright 2013- Adam Stokes
+Copyright 2013-2014 Adam Stokes
 
 =head1 LICENSE
 
