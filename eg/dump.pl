@@ -8,6 +8,7 @@ use 5.14.0;
 use FindBin;
 use lib "$FindBin::Bin/../../lib";
 use Net::OAuth::LP::Client;
+use List::AllUtils qw(first);
 
 use DDP;
 
@@ -16,25 +17,14 @@ $c->staging(1);
 
 my $bug = $c->namespace('Bug')->by_id(859600);
 
-say "Title: ". $bug->title;
-say "Desc:  ". $bug->description;
-say "Heat:  ". $bug->heat;
-say "Br0ke: ". $bug->bug->{test};
+# p $bug->tasks;
 
-my $person = $c->namespace('Person');
-#->by_name('~adam-stokes');
-p $person;
+my $bugtask =
+  first { $_->{bug_target_name} =~ /ubuntu-advantage|(Ubuntu)/ } @{$bug->tasks};
 
+p $bugtask;
 
+my $person = $c->namespace('Person')->by_name('~adam-stokes');
 
-#$c->get_bug(859600);
-# my $bugtask = $bug->tasks->entries->first(
-#     sub { $_->{bug_target_name} =~ /ubuntu-advantage|(Ubuntu)/ });
-# $bug->{target_name} = $bugtask->{bug_target_name};
-# $bug->{status}      = $bugtask->{status};
-# $bug->{importance}  = $bugtask->{importance};
-# $bug->title($bugtask->{title});
-
-# p $bug;
-
+# p $person;
 

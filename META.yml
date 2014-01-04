@@ -27,9 +27,8 @@ no_index:
     - eg
     - examples
 requires:
-  DDP: 0
+  Class::Load: 0
   IO::Socket::SSL: 0
-  LWP::Protocol::https: 0
   Mojolicious: 0
   Net::OAuth: 0
   URI: 0
@@ -39,7 +38,7 @@ resources:
   bugtracker: https://github.com/battlemidget/Net-OAuth-LP/issues
   homepage: https://github.com/battlemidget/Net-OAuth-LP
   repository: https://github.com/battlemidget/Net-OAuth-LP.git
-version: 0.017_3
+version: 0.017_4
 x_contributors:
   - 'Adam Stokes <adam.stokes@ubuntu.com>'
   - 'Adam Stokes <hackr@cypherbook.com>'
