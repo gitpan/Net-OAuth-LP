@@ -7,6 +7,12 @@ SYNOPSIS
 ATTRIBUTES
     Net::OAuth::LP implements the following attributes:
 
+  staging
+    Boolean to interact with staging server or production.
+
+  ua
+    A Mojo::UserAgent.
+
   consumer_key
     Holds the string that identifies your application.
 
@@ -17,12 +23,6 @@ ATTRIBUTES
 
   access_token_secret
     Token secret received from authorized request
-
-  staging
-    Boolean to interact with staging server or production.
-
-  ua
-    A Mojo::UserAgent.
 
 METHODS
   access_token_url
