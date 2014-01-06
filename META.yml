@@ -38,7 +38,7 @@ resources:
   bugtracker: https://github.com/battlemidget/Net-OAuth-LP/issues
   homepage: https://github.com/battlemidget/Net-OAuth-LP
   repository: https://github.com/battlemidget/Net-OAuth-LP.git
-version: 0.018
+version: 0.020
 x_contributors:
   - 'Adam Stokes <adam.stokes@ubuntu.com>'
   - 'Adam Stokes <hackr@cypherbook.com>'

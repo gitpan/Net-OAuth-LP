@@ -6,6 +6,7 @@ use Class::Load ':all';
 use URI::Encode;
 use URI::QueryParam;
 use URI;
+use DDP;
 
 has 'json' => sub { my $self = shift; Mojo::JSON->new };
 
@@ -145,11 +146,11 @@ sub login_with_creds {
     );
 
     $request->sign;
-    my $res = $self->ua->post($request->to_url,
-        Content => $request->to_post_body);
-    die "Failed to get response" unless $res->res->code == 200;
+    my $res =
+      $self->ua->post($request->to_url => $request->to_post_body );
+    die "Failed to get response: ". $res->res->message unless $res->res->code == 200;
     my $response =
-      Net::OAuth->response('request token')->from_post_body($res->content);
+      Net::OAuth->response('request token')->from_post_body($res->res->body);
     my $_token        = $response->token;
     my $_token_secret = $response->token_secret;
     say
@@ -170,11 +171,10 @@ sub login_with_creds {
     );
 
     $request->sign;
-    $res = $self->ua->post($request->to_url,
-        Content => $request->to_post_body);
+    $res = $self->ua->post($request->to_url => $request->to_post_body);
     die "Failed to get response" unless $res->res->code == 200;
     $response =
-      Net::OAuth->response('access token')->from_post_body($res->content);
+      Net::OAuth->response('access token')->from_post_body($res->res->body);
     $self->access_token($response->token);
     $self->access_token_secret($response->token_secret);
     return;
